@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Suraksha - Sign in</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f4f6f8; display:flex;
+               align-items:center; justify-content:center; height:100vh; margin:0; }
+        .card { background:#fff; padding:40px; border-radius:8px;
+                box-shadow:0 2px 10px rgba(0,0,0,0.1); width:320px; }
+        h1 { color:#2b6cb0; margin-bottom:4px; }
+        p.tagline { color:#666; margin-top:0; margin-bottom:24px; }
+        label { display:block; margin-bottom:4px; font-size:14px; color:#333; }
+        input { width:100%; padding:10px; margin-bottom:16px; border:1px solid #ccc;
+                border-radius:4px; box-sizing:border-box; font-size:14px; }
+        .msg-error { background:#fde8e8; color:#9b1c1c; padding:10px; border-radius:4px;
+                     margin-bottom:16px; font-size:14px; }
+        .msg-info { background:#e6f4ea; color:#276749; padding:10px; border-radius:4px;
+                    margin-bottom:16px; font-size:14px; }
+
+        /* Animated "Log in" button */
+        .box.start-btn {
+            position: relative;
+            width: var(--w, 100%);
+            height: var(--h, 52px);
+            border: none;
+            border-radius: 999px;
+            background: #2b6cb0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6px 0 22px;
+            cursor: pointer;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .box.start-btn .text {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .box.start-btn .btn-icon {
+            position: relative;
+            z-index: 2;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.35s ease;
+        }
+        .box.start-btn .svg {
+            width: 14px;
+            height: 14px;
+        }
+        .box.start-btn .svg path {
+            fill: #2b6cb0;
+        }
+        .box.start-btn .circle-overlay {
+            position: absolute;
+            top: 50%;
+            left: var(--tr, 15%);
+            width: 20px;
+            height: 20px;
+            background: #1f4e7a;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: 1;
+        }
+        .box.start-btn:hover .circle-overlay {
+            width: 420px;
+            height: 420px;
+        }
+        .box.start-btn:hover .btn-icon {
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Suraksha</h1>
+    <p class="tagline">Be ready. Stay safe.</p>
+
+    <div class="msg-error" th:if="${param.error}">
+        Incorrect username or password.
+    </div>
+    <div class="msg-info" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="box start-btn" style="--w:100%; --h:52px; --tr:15%;">
+            <span class="text">Log in</span>
+            <div class="btn-icon">
+                <svg class="svg" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M779.180132 473.232045 322.354755 16.406668c-21.413706-21.413706-56.121182-21.413706-77.534887 0-21.413706 21.413706-21.413706 56.122205 0 77.534887l418.057421 418.057421L244.819868 930.057421c-21.413706 21.413706-21.413706 56.122205 0 77.534887 10.706853 10.706853 24.759917 16.059767 38.767955 16.059767s28.061103-5.353938 38.767955-16.059767L779.180132 550.767955C800.593837 529.35425 800.593837 494.64575 779.180132 473.232045z"></path>
+                </svg>
+            </div>
+            <div class="circle-overlay"></div>
+        </button>
+    </form>
+</div>
+</body>
+</html>
