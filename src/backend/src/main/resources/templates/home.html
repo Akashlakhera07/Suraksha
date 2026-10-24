@@ -8,11 +8,21 @@
         header { background:#2b6cb0; color:#fff; padding:16px 24px;
                  display:flex; justify-content:space-between; align-items:center; }
         header h1 { margin:0; font-size:20px; }
-        main { padding:40px; }
-        .card { background:#fff; padding:24px; border-radius:8px;
-                box-shadow:0 2px 10px rgba(0,0,0,0.08); max-width:480px; }
+        main { padding:40px; max-width:900px; margin:0 auto; }
+        .welcome-card { background:#fff; padding:24px; border-radius:8px;
+                box-shadow:0 2px 10px rgba(0,0,0,0.08); margin-bottom:32px; }
         button { background:none; border:none; color:#fff; cursor:pointer;
                  text-decoration:underline; font-size:14px; }
+        h2.section-title { font-size:18px; color:#333; margin-bottom:16px; }
+        .module-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                       gap:16px; }
+        .module-card { background:#fff; border-radius:8px; padding:20px;
+                       box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:5px solid #2b6cb0; }
+        .module-card .hazard-tag { font-size:12px; text-transform:uppercase; letter-spacing:0.5px;
+                       color:#2b6cb0; font-weight:600; margin-bottom:6px; }
+        .module-card h3 { margin:0 0 8px 0; font-size:17px; color:#222; }
+        .module-card p { margin:0; font-size:14px; color:#666; line-height:1.4; }
+        .empty-note { color:#888; font-size:14px; }
     </style>
 </head>
 <body>
@@ -23,12 +33,24 @@
     </form>
 </header>
 <main>
-    <div class="card">
-        <h2>Welcome, <span th:text="${fullName}">Name</span>!</h2>
+    <div class="welcome-card">
+        <h2 style="margin-top:0;">Welcome, <span th:text="${fullName}">Name</span>!</h2>
         <p>You are logged in as: <strong th:text="${role}">ROLE</strong></p>
-        <p>This page proves your login was checked against the
-            <code>app_user</code> table in your MySQL database.</p>
     </div>
+
+    <h2 class="section-title">Disaster Preparedness Modules</h2>
+
+    <div class="module-grid" th:if="${not #lists.isEmpty(modules)}">
+        <div class="module-card" th:each="m : ${modules}">
+            <div class="hazard-tag" th:text="${m.hazardName}">Hazard</div>
+            <h3 th:text="${m.title}">Module title</h3>
+            <p th:text="${m.description}">Module description</p>
+        </div>
+    </div>
+
+    <p class="empty-note" th:if="${#lists.isEmpty(modules)}">
+        No modules published yet.
+    </p>
 </main>
 </body>
 </html>
