@@ -41,9 +41,27 @@ public class PageController {
 
         List<ModuleSummary> modules = learningModuleRepository.findPublishedModulesEnglish();
 
-        model.addAttribute("fullName", user.getFullName());
-        model.addAttribute("role", user.getRole());
-        model.addAttribute("modules", modules);
+        // Compute two-letter initials from the user's full name
+        String[] nameParts = user.getFullName().trim().split("\\s+");
+        String initials = nameParts.length >= 2
+                ? String.valueOf(nameParts[0].charAt(0)) + String.valueOf(nameParts[nameParts.length - 1].charAt(0))
+                : String.valueOf(nameParts[0].charAt(0));
+
+        // Friendly role label for the UI
+        String roleLabel = switch (user.getRole()) {
+            case STUDENT         -> "Student";
+            case TEACHER         -> "Teacher";
+            case INSTITUTION_ADMIN -> "Institution Admin";
+            case SYSTEM_ADMIN    -> "System Admin";
+        };
+
+        model.addAttribute("fullName",     user.getFullName());
+        model.addAttribute("role",         user.getRole());
+        model.addAttribute("roleLabel",    roleLabel);
+        model.addAttribute("initials",     initials.toUpperCase());
+        model.addAttribute("modules",      modules);
+        model.addAttribute("modulesCount", modules.size());
+
         return "home";
     }
 }
