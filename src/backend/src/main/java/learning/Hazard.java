@@ -26,9 +26,23 @@ public class Hazard {
     protected Hazard() {
     }
 
-    public Long getId() { return id; }
-    public String getCode() { return code; }
-    public String getNameEn() { return nameEn; }
-    public String getNameHi() { return nameHi; }
-    public boolean isActive() { return active; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getNameEn() {
+        return nameEn;
+    }
+
+    public String getNameHi() {
+        return nameHi;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }

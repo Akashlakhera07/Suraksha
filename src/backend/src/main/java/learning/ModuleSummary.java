@@ -4,8 +4,12 @@ package com.suraksha.suraksha.learning;
 // Spring automatically fills this in from the database query results.
 public interface ModuleSummary {
     Long getId();
+
     String getHazardCode();
+
     String getHazardName();
+
     String getTitle();
+
     String getDescription();
 }

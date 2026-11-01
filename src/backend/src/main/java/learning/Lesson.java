@@ -21,11 +21,26 @@ public class Lesson {
     @Column(nullable = false, length = 20)
     private String status = "DRAFT";
 
-    protected Lesson() {}
+    protected Lesson() {
+    }
 
-    public Long getId() { return id; }
-    public Long getModuleId() { return moduleId; }
-    public int getSortOrder() { return sortOrder; }
-    public String getPhase() { return phase; }
-    public String getStatus() { return status; }
+    public Long getId() {
+        return id;
+    }
+
+    public Long getModuleId() {
+        return moduleId;
+    }
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }
