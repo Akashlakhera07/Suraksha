@@ -43,3 +43,4 @@ public class ChecklistStatusId implements Serializable {
         return Objects.hash(institutionId, itemId);
     }
 }
+

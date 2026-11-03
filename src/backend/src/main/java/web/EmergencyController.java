@@ -189,3 +189,4 @@ public class EmergencyController {
         model.addAttribute("userInitials", initials.isEmpty() ? "U" : initials);
     }
 }
+

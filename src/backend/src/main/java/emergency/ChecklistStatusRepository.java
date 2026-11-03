@@ -6,3 +6,4 @@ import java.util.List;
 public interface ChecklistStatusRepository extends JpaRepository<ChecklistStatus, ChecklistStatusId> {
     List<ChecklistStatus> findByIdInstitutionId(Long institutionId);
 }
+

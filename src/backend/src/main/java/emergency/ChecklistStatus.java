@@ -61,3 +61,4 @@ public class ChecklistStatus {
         this.checkedOn = checkedOn;
     }
 }
+

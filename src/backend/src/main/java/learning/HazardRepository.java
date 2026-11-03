@@ -8,3 +8,4 @@ public interface HazardRepository extends JpaRepository<Hazard, Long> {
     Optional<Hazard> findByCode(String code);
     List<Hazard> findByActiveTrue();
 }
+

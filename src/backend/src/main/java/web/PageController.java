@@ -44,7 +44,8 @@ public class PageController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(jakarta.servlet.http.HttpServletRequest request) {
+        request.getSession(true);
         return "login";
     }
 

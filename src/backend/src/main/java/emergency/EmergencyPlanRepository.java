@@ -6,3 +6,4 @@ import java.util.Optional;
 public interface EmergencyPlanRepository extends JpaRepository<EmergencyPlan, Long> {
     Optional<EmergencyPlan> findByInstitutionId(Long institutionId);
 }
+

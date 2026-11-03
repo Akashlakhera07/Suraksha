@@ -14,3 +14,4 @@ public interface EmergencyContactRepository extends JpaRepository<EmergencyConta
     @Query(value = "SELECT * FROM emergency_contact WHERE (institution_id = :institutionId OR is_national = TRUE) ORDER BY is_national DESC, sort_order ASC, name ASC", nativeQuery = true)
     List<EmergencyContact> findContactsForInstitution(@Param("institutionId") Long institutionId);
 }
+
