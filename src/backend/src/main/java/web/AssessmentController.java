@@ -308,14 +308,27 @@ public class AssessmentController {
         if (optionIds == null || optionIds.isEmpty()) {
             return "redirect:/assessment/" + attemptId + "/question/" + n;
         }
+        // Validate that every submitted option belongs to this question.
+        Set<Long> validOptionIds = options.stream()
+            .map(AnswerOptionView::getId)
+            .collect(Collectors.toSet());
+        Set<Long> chosenIds = new HashSet<>(optionIds);
 
+        // Reject duplicate or invalid option IDs.
+        if (chosenIds.size() != optionIds.size() || !validOptionIds.containsAll(chosenIds)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid answer options");
+        }
+        // MCQ and TRUE_FALSE must contain exactly one selected option.
+        if (!"MULTI_SELECT".equalsIgnoreCase(question.getQType()) && optionIds.size() != 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Select exactly one option");
+        }
         boolean isCorrect;
         if ("MULTI_SELECT".equalsIgnoreCase(question.getQType())) {
             Set<Long> correctOptionIds = options.stream()
                     .filter(o -> Boolean.TRUE.equals(o.getIsCorrect()))
                     .map(AnswerOptionView::getId)
                     .collect(Collectors.toSet());
-            Set<Long> chosenIds = new HashSet<>(optionIds);
+
             isCorrect = correctOptionIds.equals(chosenIds);
         } else {
             Long chosenId = optionIds.get(0);
