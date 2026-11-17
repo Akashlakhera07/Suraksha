@@ -734,7 +734,7 @@
                             <span th:text="${s.hazardName != null ? s.hazardName : 'Emergency'}">Hazard</span>
                         </span>
 
-                        <span th:class="${'diff-badge diff-' + s.difficulty}"
+                        <span th:class="${'diff-badge diff-' + (s.difficulty != null ? s.difficulty : 'BEGINNER')}"
                             th:text="${s.difficulty != null ? s.difficulty : 'BEGINNER'}">
                             BEGINNER
                         </span>

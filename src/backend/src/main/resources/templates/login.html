@@ -442,6 +442,9 @@
             <div class="alert alert-success" th:if="${param.logout}" role="alert">
                 &#10003; You have been signed out successfully.
             </div>
+            <div class="alert alert-success" th:if="${param.registered}" role="alert">
+                &#10003; Your account has been created successfully. Please sign in.
+            </div>
 
             <form th:action="@{/login}" method="post" id="login-form">
                 <div class="field">
@@ -482,9 +485,15 @@
                 </button>
             </form>
 
-            <div class="divider"><span>Need help?</span></div>
+            <div class="divider"><span>New to Suraksha?</span></div>
+
             <div class="form-footer">
-                Contact your institution admin to get your login credentials, or write to
+                Don't have an account?
+                <a th:href="@{/register}" style="color: #2563EB; font-weight: 600; text-decoration: none;">
+                    Create Account
+                </a>
+                <br><br>
+                Contact your institution admin for help, or write to
                 <strong>support@suraksha.edu</strong>
             </div>
         </div>

@@ -9,6 +9,7 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
 
         @Query(value = "SELECT s.id AS id, s.title AS title, s.description AS description, " +
                         "s.code AS code, s.estimated_minutes AS estimatedMinutes, " +
+                        "NULL AS difficulty, NULL AS totalSteps, NULL AS bestScore, " +
                         "h.code AS hazardCode, h.name_en AS hazardName " +
                         "FROM scenario s " +
                         "JOIN hazard h ON h.id = s.hazard_id " +
@@ -18,6 +19,7 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
 
         @Query(value = "SELECT s.id AS id, s.title AS title, s.description AS description, " +
                         "s.code AS code, s.estimated_minutes AS estimatedMinutes, " +
+                        "NULL AS difficulty, NULL AS totalSteps, NULL AS bestScore, " +
                         "h.code AS hazardCode, h.name_en AS hazardName " +
                         "FROM scenario s " +
                         "LEFT JOIN hazard h ON h.id = s.hazard_id " +

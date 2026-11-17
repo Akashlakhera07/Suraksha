@@ -14,4 +14,10 @@ public interface ScenarioSummary {
     String getHazardCode();
 
     String getHazardName();
+
+    String getDifficulty();
+
+    Integer getTotalSteps();
+
+    Integer getBestScore();
 }
