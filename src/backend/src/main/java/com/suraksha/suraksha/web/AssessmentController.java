@@ -266,6 +266,13 @@ public class AssessmentController {
                     });
         }
 
+        // Resolve module title for the template header
+        String moduleTitle = learningModuleRepository.findPublishedModulesEnglish().stream()
+                .filter(s -> s.getId().equals(attempt.getModuleId()))
+                .findFirst()
+                .map(s -> s.getTitle())
+                .orElse("Module " + attempt.getModuleId());
+
         populateUserModel(user, model);
         model.addAttribute("attempt", attempt);
         model.addAttribute("question", question);
@@ -274,6 +281,7 @@ public class AssessmentController {
         model.addAttribute("totalQuestions", questions.size());
         model.addAttribute("alreadyAnswered", alreadyAnswered);
         model.addAttribute("selectedOptionIds", selectedOptionIds);
+        model.addAttribute("moduleTitle", moduleTitle);
 
         return "assessment";
     }

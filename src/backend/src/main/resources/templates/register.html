@@ -4,162 +4,569 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account | Suraksha</title>
-
+    <meta name="description" content="Create your Suraksha account to start disaster preparedness learning.">
+    <title>Suraksha — Create Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            padding: 25px 15px;
+            display: flex;
+            background: #F1F5F9;
         }
 
-        .register-container {
-            width: 100%;
-            max-width: 480px;
-            background: white;
-            padding: 35px;
-            border-radius: 14px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        /* ── Left panel ─────────────────────── */
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(150deg, #0F2460 0%, #1E3A8A 45%, #1D4ED8 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 52px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
         }
 
-        .heading {
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            top: -180px;
+            left: -140px;
+            pointer-events: none;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            bottom: -100px;
+            right: -80px;
+            pointer-events: none;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            z-index: 1;
+        }
+
+        .brand-shield {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .brand-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-headline {
+            z-index: 1;
+            margin-bottom: 40px;
             text-align: center;
-            margin-bottom: 25px;
         }
 
-        .heading h1 {
-            color: #2b6cb0;
-            margin-bottom: 8px;
+        .hero-headline h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
         }
 
-        .heading p {
-            color: #666;
+        .hero-headline h1 .accent {
+            color: #93C5FD;
+        }
+
+        .hero-headline p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.68);
+            line-height: 1.6;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .steps-list {
+            z-index: 1;
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 12px;
+            padding: 14px 16px;
+            animation: floatIn 0.5s ease both;
+        }
+
+        .step-item:nth-child(1) { animation-delay: 0.1s; }
+        .step-item:nth-child(2) { animation-delay: 0.2s; }
+        .step-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.4;
+        }
+
+        .left-tagline {
+            z-index: 1;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ── Right panel ─────────────────────── */
+        .right-panel {
+            width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 48px;
+            background: #fff;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-header {
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .form-header p {
             font-size: 14px;
+            color: #64748B;
+            line-height: 1.5;
         }
 
-        label {
+        /* Alerts */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            margin-bottom: 20px;
+            animation: slideDown 0.2s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-error {
+            background: #FEF2F2;
+            color: #B91C1C;
+            border: 1px solid #FECACA;
+        }
+
+        /* Two-column grid for some fields */
+        .fields-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 16px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
             display: block;
-            margin: 14px 0 7px;
-            font-weight: bold;
-            color: #333;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
         }
 
-        input,
-        select {
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #0F172A;
+            background: #F8FAFC;
+            transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #2563EB;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .field input::placeholder {
+            color: #94A3B8;
+        }
+
+        .select-wrap {
+            position: relative;
+        }
+
+        .select-wrap::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #64748B;
+            pointer-events: none;
+        }
+
+        .pwd-wrap {
+            position: relative;
+        }
+
+        .pwd-wrap input {
+            padding-right: 44px;
+        }
+
+        .pwd-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: #94A3B8;
+            transition: color 0.15s;
+            display: flex;
+            align-items: center;
+        }
+
+        .pwd-toggle:hover { color: #2563EB; }
+
+        .hint {
+            font-size: 11.5px;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+
+        .submit-btn {
             width: 100%;
             padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 7px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #2b6cb0;
-        }
-
-        button {
-            width: 100%;
-            padding: 13px;
-            margin-top: 22px;
-            background: #2b6cb0;
-            color: white;
+            border-radius: 10px;
             border: none;
-            border-radius: 7px;
-            font-size: 16px;
-            font-weight: bold;
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            margin-top: 6px;
         }
 
-        button:hover {
-            background: #1e4e8c;
+        .submit-btn:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
         }
 
-        .error {
-            background: #fff0f0;
-            color: #c53030;
-            padding: 11px;
-            border-radius: 6px;
-            font-size: 14px;
-            margin-bottom: 15px;
+        .submit-btn:active { transform: scale(0.98); }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
         }
 
-        .login-link {
-            text-align: center;
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E2E8F0;
+        }
+
+        .divider span {
+            font-size: 12px;
+            color: #94A3B8;
+            white-space: nowrap;
+        }
+
+        .form-footer {
             margin-top: 20px;
-            font-size: 14px;
-            color: #555;
+            text-align: center;
+            font-size: 13px;
+            color: #94A3B8;
         }
 
-        .login-link a {
-            color: #2b6cb0;
-            text-decoration: none;
-            font-weight: bold;
+        @media (max-width: 900px) {
+            .left-panel { display: none; }
+            .right-panel { width: 100%; padding: 40px 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .fields-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="register-container">
-
-        <div class="heading">
-            <h1>Suraksha</h1>
-            <p>Create your account to get started</p>
+    <!-- Left panel -->
+    <div class="left-panel">
+        <div class="brand-logo">
+            <div class="brand-shield">&#128737;</div>
+            <span class="brand-name">Suraksha</span>
         </div>
-
-        <div th:if="${error}" class="error" th:text="${error}"></div>
-
-        <form th:action="@{/register}" method="post">
-
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Choose a username" maxlength="80" required>
-
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="joinCode">Institution Join Code</label>
-            <input type="text" id="joinCode" name="joinCode" placeholder="Enter your institution code" maxlength="20"
-                required>
-
-            <label for="role">Register As</label>
-            <select id="role" name="role" required>
-                <option value="">Select your role</option>
-                <option value="STUDENT">Student</option>
-                <option value="TEACHER">Teacher</option>
-            </select>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Create a password" required>
-
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
-                required>
-
-            <button type="submit">Create Account</button>
-
-        </form>
-
-        <div class="login-link">
-            Already have an account?
-            <a th:href="@{/login}">Login here</a>
+        <div class="hero-headline">
+            <h1>Join Your <span class="accent">Institution.</span><br>Stay <span class="accent">Prepared.</span></h1>
+            <p>Create your account and start learning how to respond to disasters — earthquakes, floods, fires and more.</p>
         </div>
-
+        <div class="steps-list">
+            <div class="step-item">
+                <span class="step-icon">&#127979;</span>
+                <span class="step-text">Get your Institution Join Code from your teacher or admin</span>
+            </div>
+            <div class="step-item">
+                <span class="step-icon">&#9989;</span>
+                <span class="step-text">Fill in the form and choose your role (Student or Teacher)</span>
+            </div>
+            <div class="step-item">
+                <span class="step-icon">&#128218;</span>
+                <span class="step-text">Start learning modules, drills, and emergency simulations</span>
+            </div>
+        </div>
+        <p class="left-tagline">A Safer Campus &middot; A Stronger Tomorrow</p>
     </div>
+
+    <!-- Right panel -->
+    <div class="right-panel">
+        <div class="form-box">
+            <div class="form-header">
+                <h2>Create your account &#128075;</h2>
+                <p>Fill in your details below. All fields are required.</p>
+            </div>
+
+            <!-- Error alert -->
+            <div class="alert alert-error" th:if="${error}" role="alert">
+                &#10060; <span th:text="${error}">An error occurred.</span>
+            </div>
+
+            <form th:action="@{/register}" method="post" id="register-form">
+
+                <!-- Full Name + Username in a 2-col grid -->
+                <div class="fields-grid">
+                    <div class="field">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName"
+                               placeholder="e.g. Riya Sharma"
+                               maxlength="150" required autocomplete="name">
+                    </div>
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username"
+                               placeholder="e.g. riya123"
+                               maxlength="80" required autocomplete="username">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="yourname@school.edu"
+                           maxlength="150" required autocomplete="email">
+                </div>
+
+                <!-- Institution Join Code -->
+                <div class="field">
+                    <label for="joinCode">Institution Join Code</label>
+                    <input type="text" id="joinCode" name="joinCode"
+                           placeholder="e.g. DEMO2024"
+                           maxlength="20" required autocomplete="off">
+                    <div class="hint">Ask your teacher or institution admin for this code.</div>
+                </div>
+
+                <!-- Role -->
+                <div class="field">
+                    <label for="role">Register As</label>
+                    <div class="select-wrap">
+                        <select id="role" name="role" required>
+                            <option value="">Select your role</option>
+                            <option value="STUDENT">Student</option>
+                            <option value="TEACHER">Teacher</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Password + Confirm in 2-col grid -->
+                <div class="fields-grid">
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <div class="pwd-wrap">
+                            <input type="password" id="password" name="password"
+                                   placeholder="Min. 8 characters"
+                                   required autocomplete="new-password">
+                            <button type="button" class="pwd-toggle" aria-label="Toggle password"
+                                    onclick="togglePwd('password', this)">
+                                <svg width="17" height="17" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="pwd-wrap">
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                   placeholder="Re-enter password"
+                                   required autocomplete="new-password">
+                            <button type="button" class="pwd-toggle" aria-label="Toggle confirm password"
+                                    onclick="togglePwd('confirmPassword', this)">
+                                <svg width="17" height="17" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="create-account-btn">
+                    Create Account
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+            </form>
+
+            <div class="divider"><span>Already have an account?</span></div>
+
+            <div class="form-footer">
+                <a th:href="@{/login}"
+                   style="color: #2563EB; font-weight: 600; text-decoration: none;">
+                    &#8592; Back to Sign In
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePwd(fieldId, btn) {
+            var input = document.getElementById(fieldId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.style.color = '#2563EB';
+            } else {
+                input.type = 'password';
+                btn.style.color = '';
+            }
+        }
+
+        // Client-side password match check before submit
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            var pwd = document.getElementById('password').value;
+            var confirm = document.getElementById('confirmPassword').value;
+            if (pwd !== confirm) {
+                e.preventDefault();
+                // Show inline error
+                var existing = document.querySelector('.alert-error');
+                if (!existing) {
+                    var alert = document.createElement('div');
+                    alert.className = 'alert alert-error';
+                    alert.innerHTML = '&#10060; Passwords do not match. Please re-enter.';
+                    document.querySelector('.form-box').insertBefore(alert, document.getElementById('register-form'));
+                } else {
+                    existing.innerHTML = '&#10060; Passwords do not match. Please re-enter.';
+                }
+                document.getElementById('confirmPassword').focus();
+            }
+        });
+    </script>
 
 </body>
 
