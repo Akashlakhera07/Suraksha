@@ -570,7 +570,7 @@
                     <p class="page-subtitle">Scheduled institutional exercises testing real-time evacuation routes, role
                         responsibilities, and speed (FR-VD-01 to FR-VD-09).</p>
                 </div>
-                <a th:if="${role == 'TEACHER' or role == 'INSTITUTION_ADMIN' or role == 'SYSTEM_ADMIN'}"
+                <a th:if="${role.name() == 'TEACHER' or role.name() == 'INSTITUTION_ADMIN' or role.name() == 'SYSTEM_ADMIN'}"
                     href="/drills/new" class="btn-schedule">
                     + Schedule New Drill
                 </a>

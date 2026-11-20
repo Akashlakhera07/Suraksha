@@ -11,12 +11,22 @@ public interface ModuleProgressRepository extends JpaRepository<ModuleProgress, 
     @Query(value = "SELECT * FROM module_progress WHERE user_id = :userId AND module_id = :moduleId", nativeQuery = true)
     Optional<ModuleProgress> findByUserIdAndModuleId(@Param("userId") Long userId, @Param("moduleId") Long moduleId);
 
-    @Query(value = "SELECT COUNT(*) FROM lesson_progress lp JOIN lesson l ON l.id = lp.lesson_id WHERE lp.user_id = :userId AND l.module_id = :moduleId", nativeQuery = true)
+    // Completed = lessons the student finished that are published AND visible (have
+    // English text)
+    @Query(value = "SELECT COUNT(*) FROM lesson_progress lp JOIN lesson l ON l.id = lp.lesson_id "
+            + "JOIN lesson_text lt ON lt.lesson_id = l.id AND lt.language = 'en' "
+            + "WHERE lp.user_id = :userId AND l.module_id = :moduleId AND l.status = 'PUBLISHED'", nativeQuery = true)
     long countCompletedLessonsForUserModule(@Param("userId") Long userId, @Param("moduleId") Long moduleId);
 
-    @Query(value = "SELECT COUNT(*) FROM lesson WHERE module_id = :moduleId AND status = 'PUBLISHED'", nativeQuery = true)
+    // Total = published lessons that are visible (have English text), same rule as
+    // the module page
+    @Query(value = "SELECT COUNT(*) FROM lesson l "
+            + "JOIN lesson_text lt ON lt.lesson_id = l.id AND lt.language = 'en' "
+            + "WHERE l.module_id = :moduleId AND l.status = 'PUBLISHED'", nativeQuery = true)
     long countPublishedLessonsInModule(@Param("moduleId") Long moduleId);
 
-    @Query(value = "SELECT lp.lesson_id FROM lesson_progress lp JOIN lesson l ON l.id = lp.lesson_id WHERE lp.user_id = :userId AND l.module_id = :moduleId", nativeQuery = true)
+    @Query(value = "SELECT lp.lesson_id FROM lesson_progress lp JOIN lesson l ON l.id = lp.lesson_id "
+            + "JOIN lesson_text lt ON lt.lesson_id = l.id AND lt.language = 'en' "
+            + "WHERE lp.user_id = :userId AND l.module_id = :moduleId AND l.status = 'PUBLISHED'", nativeQuery = true)
     List<Long> findCompletedLessonIdsForUserAndModule(@Param("userId") Long userId, @Param("moduleId") Long moduleId);
 }
