@@ -318,8 +318,8 @@ public class AssessmentController {
         }
         // Validate that every submitted option belongs to this question.
         Set<Long> validOptionIds = options.stream()
-            .map(AnswerOptionView::getId)
-            .collect(Collectors.toSet());
+                .map(AnswerOptionView::getId)
+                .collect(Collectors.toSet());
         Set<Long> chosenIds = new HashSet<>(optionIds);
 
         // Reject duplicate or invalid option IDs.
@@ -415,8 +415,14 @@ public class AssessmentController {
                     ans.isCorrect(),
                     qView != null ? qView.getExplanation() : null));
         }
+        String moduleTitle = learningModuleRepository.findPublishedModulesEnglish().stream()
+                .filter(s -> s.getId().equals(attempt.getModuleId()))
+                .findFirst()
+                .map(s -> s.getTitle())
+                .orElse("Module " + attempt.getModuleId());
 
         populateUserModel(user, model);
+        model.addAttribute("moduleTitle", moduleTitle); // <- new line
         model.addAttribute("attempt", attempt);
         model.addAttribute("questionResults", questionResults);
         model.addAttribute("scorePercent", scorePercent);

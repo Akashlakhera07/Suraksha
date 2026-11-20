@@ -752,7 +752,8 @@
                                 &#10003;
                             </div>
                             <div class="review-q-title">
-                                <span th:text="${'Q' + (qrStat.index + 1) + '. ' + qr.questionText}">
+                                <span
+                                    th:text="${'Q' + (qrStat.index + 1) + '. ' + (qr.question != null ? qr.question.questionText : '')}">
                                     Q1. What should you do first during an earthquake?
                                 </span>
                             </div>
